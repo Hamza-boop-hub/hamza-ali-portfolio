@@ -5,14 +5,17 @@ import NotFound from "../views/NotFound.vue";
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: "/", name: "home", component: Home },
+    { path: "/", name: "home", component: Home, alias: "/projects/:slug" },
     { path: "/:pathMatch(.*)*", name: "not-found", component: NotFound },
   ],
   scrollBehavior(to, from, savedPosition) {
+    // Back/forward: return to where the user actually was. Closing a project
+    // opened after scrolling past an old section hash (e.g. /#experience
+    // still in the URL) must not jump back to that section.
+    if (savedPosition) return savedPosition;
     if (to.hash) {
       return { el: to.hash, behavior: "smooth" };
     }
-    if (savedPosition) return savedPosition;
     return { top: 0 };
   },
 });

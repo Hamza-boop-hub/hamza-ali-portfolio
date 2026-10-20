@@ -1,10 +1,17 @@
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted, nextTick } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import Reveal from "./Reveal.vue";
 import { ArrowLeft, Braces, Check, CheckCheck, Code, ExternalLink, Github, Layers, Palette, PenTool, X } from "lucide-vue-next";
 
 // Index of the project whose full-screen detail view is open (reference style)
 const openProject = ref(null);
+
+// The detail route is the home route's alias (/projects/:slug) — navigating
+// to it reuses the same Home view, so the URL can carry the project's name
+// without remounting the page.
+const route = useRoute();
+const router = useRouter();
 
 // Tech-chip icon by tag (theme-matched lucide glyphs, reference style)
 function tagIcon(tag) {
@@ -135,13 +142,33 @@ function playLoader() {
   }
 }
 
+// URL slug for a project detail — "hamza-sweetcreamery" opens at
+// /projects/hamza-sweetcreamery so the address bar shows which project is on
+// screen. A project may define its own `slug`, otherwise the title is used;
+// navigating back restores the previous URL.
+function projectSlug(project) {
+  return (
+    project.slug ||
+    project.title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+  );
+}
+
+function projectIndexFromSlug(slug) {
+  return projects.findIndex((p) => projectSlug(p) === slug);
+}
+
 function closeDetail() {
   if (openProject.value === null) return;
   playLoader(); // covers the screen while the view closes underneath
   openProject.value = null;
   if (detailHistoryActive) {
     detailHistoryActive = false;
-    history.back(); // popstate fires — handler no-ops because we already closed
+    router.back(); // route watcher no-ops because we already closed
+  } else {
+    router.replace("/"); // deep-link without a pushed entry — leave the project URL
   }
 }
 
@@ -217,13 +244,26 @@ function openDetail(index) {
   openProject.value = index;
 }
 
-const onPopState = () => {
-  detailHistoryActive = false;
-  if (openProject.value !== null) {
-    playLoader();
-    openProject.value = null;
-  }
-};
+// URL changes go through the router and browsers resolve history themselves,
+// so back/forward/reload reach us as slug changes on the current route:
+watch(
+  () => route.params.slug,
+  (slug) => {
+    const idx = slug ? projectIndexFromSlug(slug) : -1;
+    if (idx !== -1 && openProject.value !== idx) {
+      // Forward navigation to a pushed project entry: reopen that project
+      // without pushing a second history entry (the stack already has it).
+      detailHistoryActive = true;
+      playLoader();
+      openProject.value = idx;
+    } else if (idx === -1 && openProject.value !== null) {
+      // Browser back closed the detail.
+      detailHistoryActive = false;
+      playLoader();
+      openProject.value = null;
+    }
+  },
+);
 
 watch(openProject, (val) => {
   document.body.style.overflow = val !== null ? "hidden" : "";
@@ -237,7 +277,9 @@ watch(openProject, (val) => {
   if (val !== null) galleryAutoStart();
   if (val !== null && !detailHistoryActive) {
     detailHistoryActive = true;
-    history.pushState({ projectDetail: true }, "");
+    router
+      .push("/projects/" + projectSlug(projects[val]))
+      .catch(() => {});
   }
 });
 const onKeydown = (e) => {
@@ -245,11 +287,23 @@ const onKeydown = (e) => {
 };
 onMounted(() => {
   window.addEventListener("keydown", onKeydown);
-  window.addEventListener("popstate", onPopState);
+  // Deep link / reload on a project URL (/projects/hamza-sweetcreamery):
+  // open that project so the address bar always matches what is on screen.
+  // The loaded entry is replaced with home first so closeDetail()'s
+  // router.back() returns to a clean home entry instead of leaving the site.
+  const slug = route.params.slug || "";
+  const deepIdx = projectIndexFromSlug(slug);
+  if (slug && deepIdx === -1) {
+    router.replace("/"); // unknown project — land on home
+  } else if (deepIdx !== -1) {
+    router
+      .replace("/")
+      .then(() => openDetail(deepIdx))
+      .catch(() => {});
+  }
 });
 onUnmounted(() => {
   window.removeEventListener("keydown", onKeydown);
-  window.removeEventListener("popstate", onPopState);
   document.body.style.overflow = "";
   galleryAutoStop();
 });
@@ -257,6 +311,7 @@ onUnmounted(() => {
 const projects = [
   {
     title: "Sweet Creamery",
+    slug: "hamza-sweetcreamery", // name shown in the project URL
     headline: "Responsive Ice Cream & Dessert Shop Landing Page",
     description:
       "An ice cream shop website with a responsive layout and modern UI, deployed live on Netlify.",
