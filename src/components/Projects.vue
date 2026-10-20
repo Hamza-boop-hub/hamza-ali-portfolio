@@ -316,6 +316,47 @@ const projects = [
     tags: ["Vue.js", "Nuxt", "Tailwind"],
     demo: "https://www.sublimelogics.com/",
   },
+  {
+    title: "Employee Performance Review System",
+    headline: "Monthly Performance Reviews & KPI Scoring for an Accounting App",
+    description:
+      "A complete performance review module for a company accounting app — automated monthly reviews, an employee self-review portal, weighted KPI scoring, and performance reports.",
+    overview:
+      "The Employee Performance Review System is a full module built into a Laravel accounting app using Filament v3. On the last Friday of every month it automatically generates a review for each active employee. Employees open a dedicated portal with their employee ID — no login needed — and submit their self-review, while management evaluates them against weighted KPIs to produce a final score out of 100.\n\nReviews move through a clear status workflow — Pending, Submitted, Evaluated, and Completed. Managers rate every active KPI from 1 to 5 with comments while a live provisional score updates in real time; completing the review locks the final score and notifies the employee. A report page tracks reviewed counts, average, highest and lowest scores, plus per-employee 6-month and 12-month averages.",
+    features: [
+      "Automated Monthly Generation — an artisan command creates one review per active employee on the last Friday of every month",
+      "Employee Self-Review Portal — employees look up their reviews with an employee ID and submit answers",
+      "Flexible Question Bank — six answer types (text, long text, yes/no, select, checkbox, rating) with drag-to-reorder ordering",
+      "Weighted KPI Evaluation — managers rate every active KPI from 1–5 with comments; weights drive the final score out of 100",
+      "Live Provisional Score — the weighted score recalculates and displays live while the review is being evaluated",
+      "Status Workflow & Notifications — Pending → Submitted → Evaluated → Completed with Discord and email notifications",
+      "Performance Reports — month and employee filters with reviewed counts, average/highest/lowest scores, and 6-month & 12-month averages per employee",
+      "Answer Snapshots — each review stores a snapshot of its questions and options, so past answers stay intact if the question bank changes",
+    ],
+    image: "/projects/eprs-full.jpg",
+    pan: "-25.3%",
+    gallery: [
+      "/projects/eprs-portal-home.jpg",
+      "/projects/eprs-question-bank.jpg",
+      "/projects/eprs-question-edit.jpg",
+      "/projects/eprs-kpis.jpg",
+      "/projects/eprs-kpi-edit.jpg",
+      "/projects/eprs-generate-modal.jpg",
+      "/projects/eprs-reviews-pending.jpg",
+      "/projects/eprs-portal-list.jpg",
+      "/projects/eprs-self-review-empty.jpg",
+      "/projects/eprs-self-review.jpg",
+      "/projects/eprs-review-submitted.jpg",
+      "/projects/eprs-reviews-list.jpg",
+      "/projects/eprs-evaluate-empty.jpg",
+      "/projects/eprs-kpi-evaluation.jpg",
+      "/projects/eprs-complete-modal.jpg",
+      "/projects/eprs-review-completed.jpg",
+      "/projects/eprs-employee-score.jpg",
+      "/projects/eprs-report.jpg",
+    ],
+    tags: ["Laravel", "Filament", "Livewire", "MySQL"],
+  },
 ];
 </script>
 
@@ -536,8 +577,9 @@ const projects = [
           </div>
         </div>
 
-        <!-- Actions: Live demo + GitHub -->
+        <!-- Actions: Live demo + GitHub (hidden when a project has neither link) -->
         <div
+          v-if="projects[openProject].demo || projects[openProject].github"
           class="mt-6 flex flex-col items-center gap-4 rounded-2xl border border-border bg-card p-6 sm:flex-row sm:justify-center sm:gap-6"
         >
           <a
