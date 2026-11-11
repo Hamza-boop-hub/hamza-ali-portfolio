@@ -24,19 +24,20 @@ const technologies = [
   byName("Tailwind CSS"),
   byName("Bootstrap"),
   // Tools
-  byName("GitHub"),
+  { ...byName("GitHub"), name: "Git & GitHub" },
   byName("Cursor"),
-  { name: "ChatGPT", icon: Sparkles, hex: "#E7E5E4" },
+  { name: "Claude", icon: Sparkles, hex: "#E7E5E4" },
 ];
 
-// Brand logos that are near-black would vanish on a dark tile — render those in a light neutral.
+// Brand logos that are near-black would vanish on a dark tile — render those in
+// a theme-aware neutral (light stone on dark theme, dark stone on light theme).
 const fillFor = (hex) => {
   const c = hex.replace("#", "");
   const r = parseInt(c.slice(0, 2), 16);
   const g = parseInt(c.slice(2, 4), 16);
   const b = parseInt(c.slice(4, 6), 16);
   const lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-  return lum < 0.32 ? "#E7E5E4" : hex;
+  return lum < 0.32 ? "var(--icon-neutral)" : hex;
 };
 </script>
 
@@ -77,7 +78,7 @@ const fillFor = (hex) => {
           class="h-full"
         >
           <div
-            class="group flex h-full flex-col items-center gap-3 rounded-2xl border border-border bg-card/40 px-3 py-5 transition-all hover:-translate-y-1 hover:border-copper hover:bg-card"
+            class="group flex h-full flex-col items-center gap-3 rounded-2xl border border-border bg-card px-3 py-5 transition-all hover:-translate-y-1 hover:border-copper hover:bg-card"
           >
             <!-- Tile: outlined by default, solid copper on hover (logo flips to white) -->
             <span
@@ -89,7 +90,7 @@ const fillFor = (hex) => {
                 class="size-6 transition-all group-hover:brightness-0 group-hover:invert"
                 aria-hidden="true"
               >
-                <path :d="tech.path" :fill="fillFor(tech.hex)" />
+                <path :d="tech.path" :style="{ fill: fillFor(tech.hex) }" />
               </svg>
               <component
                 :is="tech.icon"

@@ -1,5 +1,5 @@
 <script setup>
-import { ArrowRight, Code2, Database, Server, Shield } from "lucide-vue-next";
+import { ArrowRight, Code2, Database, FileText, Server, Shield } from "lucide-vue-next";
 
 const floatingBadges = [
   { label: "Laravel", delay: 0 },
@@ -67,6 +67,15 @@ const capabilities = [
               class="inline-flex items-center rounded-xl border border-border bg-card/50 px-6 py-3 text-sm font-medium text-foreground transition-all hover:border-copper/50 hover:bg-card"
             >
               Let's Talk
+            </a>
+            <a
+              href="/Hamza-Ali-CV.pdf"
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2 rounded-xl border border-border bg-card/50 px-6 py-3 text-sm font-medium text-foreground transition-all hover:border-copper/50 hover:bg-card"
+            >
+              <FileText :size="16" />
+              Download CV
             </a>
           </div>
 

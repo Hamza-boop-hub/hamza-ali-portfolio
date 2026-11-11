@@ -310,40 +310,6 @@ onUnmounted(() => {
 
 const projects = [
   {
-    title: "Sweet Creamery",
-    slug: "hamza-sweetcreamery", // name shown in the project URL
-    headline: "Responsive Ice Cream & Dessert Shop Landing Page",
-    description:
-      "An ice cream shop website with a responsive layout and modern UI, deployed live on Netlify.",
-    overview:
-      "hamza-sweetcreamery is a colorful, single-page website for an ice cream and dessert shop. It showcases flavors, promotional deals, customer favorites, the brand story, reviews, and a community gallery through a modern, fully responsive front-end built for desktop, tablet, and mobile.",
-    features: [
-      "Fully responsive single-page layout for desktop, tablet, and mobile",
-      "Fixed navigation bar with active-section highlighting",
-      "Animated hero section with product artwork and a customer rating card",
-      "Flavor carousel with six product cards",
-      "Promotional deals and customer favorites section",
-      "Feature cards for ingredients, craftsmanship, delivery, and sustainability",
-      "Brand story section with supporting imagery",
-      "Customer reviews slider",
-      "Community gallery with responsive image cards",
-      "Newsletter subscription form",
-      "Smooth scrolling and scroll-to-top control",
-      "Custom hover effects, transitions, and reduced-motion support",
-    ],
-    image: "/projects/sweet-creamery-full.jpg",
-    pan: "-88.7%",
-    gallery: [
-      "/projects/sweet-creamery-home.jpg",
-      "/projects/sweet-creamery-story.jpg",
-      "/projects/sweet-creamery-gallery.jpg",
-      "/projects/sweet-creamery-footer.jpg",
-    ],
-    tags: ["HTML5", "CSS", "JavaScript"],
-    github: "https://github.com/Hamza-boop-hub",
-    demo: "https://hamza-sweetcreamery.netlify.app/",
-  },
-  {
     title: "Sublime Logics",
     description:
       "Official company website for Sublime Logics presenting enterprise software, AI agent development, and automation services with case studies and industry focus.",
@@ -388,8 +354,8 @@ const projects = [
       "Performance Reports — month and employee filters with reviewed counts, average/highest/lowest scores, and 6-month & 12-month averages per employee",
       "Answer Snapshots — each review stores a snapshot of its questions and options, so past answers stay intact if the question bank changes",
     ],
-    image: "/projects/eprs-full.jpg",
-    pan: "-25.3%",
+    image: "/projects/eprs-card.jpg", // 1:1 capture — fills the card edge-to-edge
+    pan: "0%", // square image = exact fit; static on hover (no slide)
     gallery: [
       "/projects/eprs-portal-home.jpg",
       "/projects/eprs-question-bank.jpg",
@@ -411,6 +377,40 @@ const projects = [
       "/projects/eprs-report.jpg",
     ],
     tags: ["Laravel", "Filament", "Livewire", "MySQL"],
+  },
+  {
+    title: "Sweet Creamery",
+    slug: "hamza-sweetcreamery", // name shown in the project URL
+    headline: "Responsive Ice Cream & Dessert Shop Landing Page",
+    description:
+      "An ice cream shop website with a responsive layout and modern UI, deployed live on Netlify.",
+    overview:
+      "hamza-sweetcreamery is a colorful, single-page website for an ice cream and dessert shop. It showcases flavors, promotional deals, customer favorites, the brand story, reviews, and a community gallery through a modern, fully responsive front-end built for desktop, tablet, and mobile.",
+    features: [
+      "Fully responsive single-page layout for desktop, tablet, and mobile",
+      "Fixed navigation bar with active-section highlighting",
+      "Animated hero section with product artwork and a customer rating card",
+      "Flavor carousel with six product cards",
+      "Promotional deals and customer favorites section",
+      "Feature cards for ingredients, craftsmanship, delivery, and sustainability",
+      "Brand story section with supporting imagery",
+      "Customer reviews slider",
+      "Community gallery with responsive image cards",
+      "Newsletter subscription form",
+      "Smooth scrolling and scroll-to-top control",
+      "Custom hover effects, transitions, and reduced-motion support",
+    ],
+    image: "/projects/sweet-creamery-full.jpg",
+    pan: "-88.7%",
+    gallery: [
+      "/projects/sweet-creamery-home.jpg",
+      "/projects/sweet-creamery-story.jpg",
+      "/projects/sweet-creamery-gallery.jpg",
+      "/projects/sweet-creamery-footer.jpg",
+    ],
+    tags: ["HTML5", "CSS", "JavaScript"],
+    github: "https://github.com/Hamza-boop-hub",
+    demo: "https://hamza-sweetcreamery.netlify.app/",
   },
 ];
 </script>
@@ -449,7 +449,7 @@ const projects = [
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         <Reveal v-for="(project, index) in projects" :key="project.title" :delay="index * 100">
           <article
-            class="group relative cursor-pointer overflow-hidden rounded-2xl border border-border bg-card/40 transition-all hover:-translate-y-1.5 hover:border-copper/40"
+            class="group relative cursor-pointer overflow-hidden rounded-2xl border border-border bg-card shadow-card transition-all hover:-translate-y-1.5 hover:border-copper/40"
             @click="openDetail(index)"
           >
             <!-- Screenshot only: pans through the whole page on hover -->
@@ -578,7 +578,7 @@ const projects = [
         <div class="mt-6 grid items-start gap-6 lg:grid-cols-2">
           <!-- Overview -->
           <div
-            class="rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-copper/40 hover:shadow-[0_16px_40px_-18px_color-mix(in_oklab,var(--color-copper)_60%,transparent)] sm:p-8"
+            class="rounded-2xl border border-border bg-card p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-copper/40 hover:shadow-[0_16px_40px_-18px_color-mix(in_oklab,var(--color-copper)_60%,transparent)] sm:p-8"
           >
             <div class="flex items-center gap-3">
               <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-copper/15 text-copper">
@@ -604,7 +604,7 @@ const projects = [
 
           <!-- Highlights -->
           <div
-            class="rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-copper/40 hover:shadow-[0_16px_40px_-18px_color-mix(in_oklab,var(--color-copper)_60%,transparent)] sm:p-8"
+            class="rounded-2xl border border-border bg-card p-6 shadow-card transition-all duration-300 hover:-translate-y-1 hover:border-copper/40 hover:shadow-[0_16px_40px_-18px_color-mix(in_oklab,var(--color-copper)_60%,transparent)] sm:p-8"
           >
             <div class="flex items-center gap-3">
               <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-copper/15 text-copper">
@@ -635,7 +635,7 @@ const projects = [
         <!-- Actions: Live demo + GitHub (hidden when a project has neither link) -->
         <div
           v-if="projects[openProject].demo || projects[openProject].github"
-          class="mt-6 flex flex-col items-center gap-4 rounded-2xl border border-border bg-card p-6 sm:flex-row sm:justify-center sm:gap-6"
+          class="mt-6 flex flex-col items-center gap-4 rounded-2xl border border-border bg-card p-6 shadow-card sm:flex-row sm:justify-center sm:gap-6"
         >
           <a
             v-if="projects[openProject].demo"

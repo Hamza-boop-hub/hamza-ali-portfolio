@@ -3,6 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Restore saved theme BEFORE first paint (no flash of wrong theme) -->
+    <script>
+      (function () {
+        try {
+          /* First-time visitors get the light theme by default;
+             only a saved "dark" choice restores dark mode */
+          if (localStorage.getItem("theme") === "dark") {
+            document.documentElement.classList.add("dark");
+          } else {
+            document.documentElement.classList.remove("dark");
+          }
+        } catch (e) {
+          /* storage blocked — keep default light */
+        }
+      })();
+    </script>
+
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 
     <title>Hamza — Junior Web Developer</title>
@@ -24,11 +42,28 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
     />
 
-    <!-- Preloader: self-contained so it paints before app CSS/JS arrive -->
+    <!-- Preloader: self-contained so it paints before app CSS/JS arrive.
+         Theme-aware via vars set here (the pre-paint script above picks the class). -->
     <style>
+      :root {
+        --pl-bg: oklch(0.975 0.006 258);
+        --pl-name: oklch(0.21 0.028 264);
+        --pl-track: oklch(0.905 0.006 258);
+        --pl-chip-bg: oklch(1 0 0);
+        --pl-chip-border: oklch(0.905 0.006 258);
+      }
+
+      html.dark {
+        --pl-bg: oklch(0.145 0.03 270);
+        --pl-name: oklch(0.94 0.01 90);
+        --pl-track: oklch(0.21 0.035 270);
+        --pl-chip-bg: oklch(0.185 0.035 270);
+        --pl-chip-border: oklch(1 0 0 / 8%);
+      }
+
       body.is-loading {
         overflow: hidden;
       }
@@ -39,7 +74,7 @@
         z-index: 9999;
         display: grid;
         place-items: center;
-        background-color: oklch(0.145 0.03 270);
+        background-color: var(--pl-bg);
         transition:
           opacity 0.5s ease,
           visibility 0.5s ease;
@@ -67,7 +102,7 @@
         font-weight: 700;
         font-size: clamp(34px, 6vw, 54px);
         letter-spacing: -0.03em;
-        color: oklch(0.94 0.01 90);
+        color: var(--pl-name);
         opacity: 0;
         animation: loader-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.05s forwards;
       }
@@ -112,7 +147,7 @@
         width: min(280px, 62vw);
         height: 3px;
         border-radius: 999px;
-        background-color: oklch(0.21 0.035 270);
+        background-color: var(--pl-track);
         overflow: hidden;
         opacity: 0;
         animation: loader-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards;
@@ -137,8 +172,8 @@
         width: 46px;
         height: 46px;
         border-radius: 14px;
-        background-color: oklch(0.185 0.035 270);
-        border: 1px solid oklch(1 0 0 / 8%);
+        background-color: var(--pl-chip-bg);
+        border: 1px solid var(--pl-chip-border);
         color: oklch(0.65 0.16 55);
         box-shadow: 0 0 44px -14px oklch(0.65 0.16 55 / 0.75);
         opacity: 0;

@@ -4,6 +4,8 @@
     class="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
   >
     <div class="signal-grid" />
+    <div class="ambient-cool" />
+    <div class="ambient-warm" />
     <div class="signal-scan" />
     <div class="signal-line signal-line-one" />
     <div class="signal-line signal-line-two" />

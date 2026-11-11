@@ -197,7 +197,7 @@ const handleSubmit = async () => {
         <div class="lg:col-span-7">
           <Reveal :delay="200">
             <form
-              class="rounded-2xl border border-border bg-card/40 p-6 sm:p-8"
+              class="rounded-2xl border border-border bg-card p-6 shadow-card sm:p-8"
               novalidate
               @submit.prevent="handleSubmit"
             >
@@ -217,7 +217,7 @@ const handleSubmit = async () => {
                   />
                   <p
                     v-if="errors.name"
-                    class="field-error mt-1.5 text-[11px] font-medium tracking-wide text-rose-300/85"
+                    class="field-error mt-1.5 text-[11px] font-medium tracking-wide text-rose-600/90 dark:text-rose-300/85"
                     role="alert"
                   >
                     {{ errors.name }}
@@ -238,7 +238,7 @@ const handleSubmit = async () => {
                   />
                   <p
                     v-if="errors.email"
-                    class="field-error mt-1.5 text-[11px] font-medium tracking-wide text-rose-300/85"
+                    class="field-error mt-1.5 text-[11px] font-medium tracking-wide text-rose-600/90 dark:text-rose-300/85"
                     role="alert"
                   >
                     {{ errors.email }}
@@ -261,7 +261,7 @@ const handleSubmit = async () => {
                 />
                 <p
                   v-if="errors.subject"
-                  class="field-error mt-1.5 text-[11px] font-medium tracking-wide text-rose-300/85"
+                  class="field-error mt-1.5 text-[11px] font-medium tracking-wide text-rose-600/90 dark:text-rose-300/85"
                   role="alert"
                 >
                   {{ errors.subject }}
@@ -283,7 +283,7 @@ const handleSubmit = async () => {
                 />
                 <p
                   v-if="errors.message"
-                  class="field-error mt-1.5 text-[11px] font-medium tracking-wide text-rose-300/85"
+                  class="field-error mt-1.5 text-[11px] font-medium tracking-wide text-rose-600/90 dark:text-rose-300/85"
                   role="alert"
                 >
                   {{ errors.message }}
@@ -328,7 +328,7 @@ const handleSubmit = async () => {
                     role="status"
                     aria-live="polite"
                   >
-                    <CheckCircle2 :size="18" class="mt-0.5 shrink-0 text-emerald-400" />
+                    <CheckCircle2 :size="18" class="mt-0.5 shrink-0 text-emerald-600 dark:text-emerald-400" />
                     <div class="min-w-0">
                       <p class="text-sm font-medium text-foreground">
                         Thank you! Your message has been received.
@@ -341,7 +341,7 @@ const handleSubmit = async () => {
                     </div>
                     <button
                       type="button"
-                      class="-mr-1 ml-auto shrink-0 self-start rounded-md p-1 text-emerald-400/70 transition-colors hover:bg-emerald-500/15 hover:text-emerald-300"
+                      class="-mr-1 ml-auto shrink-0 self-start rounded-md p-1 text-emerald-600/70 transition-colors hover:bg-emerald-500/15 hover:text-emerald-700 dark:text-emerald-400/70 dark:hover:text-emerald-300"
                       aria-label="Dismiss message"
                       @click="dismissMessage"
                     >
@@ -354,7 +354,7 @@ const handleSubmit = async () => {
                     class="flex items-start gap-3 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3.5"
                     role="alert"
                   >
-                    <AlertCircle :size="18" class="mt-0.5 shrink-0 text-red-400" />
+                    <AlertCircle :size="18" class="mt-0.5 shrink-0 text-red-600 dark:text-red-400" />
                     <div class="min-w-0">
                       <p class="text-sm font-medium text-foreground">Something went wrong.</p>
                       <p class="mt-0.5 text-xs leading-relaxed text-muted-foreground">

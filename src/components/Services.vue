@@ -15,7 +15,7 @@ const services = [
     icon: Server,
     title: "Laravel Development",
     description:
-      "Custom web applications, business logic, admin panels, and backend systems built with Laravel.",
+      "Custom web applications, admin panels and backend systems built with Laravel.",
   },
   {
     icon: Code,
@@ -93,7 +93,7 @@ const services = [
       <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         <Reveal v-for="(service, index) in services" :key="service.title" :delay="index * 80">
           <div
-            class="group h-full rounded-2xl border border-border bg-card/40 p-6 transition-all hover:-translate-y-1 hover:border-copper/40 hover:bg-card"
+            class="group h-full rounded-2xl border border-border bg-card p-6 shadow-card transition-all hover:-translate-y-1 hover:border-copper/40 hover:bg-card"
           >
             <div
               class="grid size-12 place-items-center rounded-xl bg-secondary text-copper transition-colors group-hover:bg-copper/20"

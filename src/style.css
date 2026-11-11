@@ -69,8 +69,70 @@
 
 :root {
   --radius: 0.75rem;
+  color-scheme: light;
 
-  /* Base palette (dark mode default for this portfolio) */
+  /* Base palette (light mode — template style: cool bluish canvas, vivid orange) */
+  --background: oklch(0.975 0.006 258);
+  --foreground: oklch(0.21 0.028 264);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.21 0.028 264);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.21 0.028 264);
+  /* Vivid orange CTA — white label (reference template style) */
+  --primary: oklch(0.705 0.175 49);
+  --primary-foreground: oklch(0.99 0.004 90);
+  --secondary: oklch(0.945 0.005 258);
+  --secondary-foreground: oklch(0.21 0.028 264);
+  --muted: oklch(0.945 0.005 258);
+  --muted-foreground: oklch(0.46 0.022 262);
+  --accent: oklch(0.52 0.1 170);
+  --accent-foreground: oklch(0.98 0.01 90);
+  --destructive: oklch(0.58 0.22 25);
+  --destructive-foreground: oklch(0.98 0.01 90);
+  --border: oklch(0.905 0.006 258);
+  --input: oklch(0.885 0.006 258);
+  --ring: oklch(0.705 0.175 49);
+
+  --chart-1: oklch(0.65 0.16 55);
+  --chart-2: oklch(0.55 0.14 170);
+  --chart-3: oklch(0.6 0.12 250);
+  --chart-4: oklch(0.7 0.1 40);
+  --chart-5: oklch(0.5 0.08 300);
+
+  --sidebar: oklch(0.972 0.004 255);
+  --sidebar-foreground: oklch(0.22 0.025 262);
+  --sidebar-primary: oklch(0.52 0.14 53);
+  --sidebar-primary-foreground: oklch(0.12 0.02 270);
+  --sidebar-accent: oklch(0.945 0.005 258);
+  --sidebar-accent-foreground: oklch(0.22 0.025 262);
+  --sidebar-border: oklch(0.905 0.006 258);
+  --sidebar-ring: oklch(0.52 0.14 53);
+
+  /* Custom tokens — in light mode "ink" surfaces become soft paper layers
+     and "frost" (text on them) becomes deep ink; both flip together so
+     glass badges/footers keep correct contrast in either theme. */
+  /* Vivid orange accent — reference template style */
+  --copper: oklch(0.705 0.175 49);
+  --copper-light: oklch(0.76 0.155 49);
+  --ink: oklch(0.94 0.005 258);
+  --ink-2: oklch(0.905 0.006 258);
+  --ink-3: oklch(0.865 0.007 258);
+  --frost: oklch(0.28 0.025 262);
+  --frost-2: oklch(0.5 0.02 260);
+  --glow: oklch(0.72 0.12 170);
+
+  /* Near-black brand icons need a dark neutral on light tiles */
+  --icon-neutral: #1c1917;
+
+  --font-display-name: "Space Grotesk", sans-serif;
+  --font-body-name: "Inter", sans-serif;
+  --font-mono-name: "JetBrains Mono", monospace;
+}
+
+/* Dark mode — the original "Amber Engine" palette */
+.dark {
+  color-scheme: dark;
+
   --background: oklch(0.145 0.03 270);
   --foreground: oklch(0.94 0.01 90);
   --card: oklch(0.185 0.035 270);
@@ -91,12 +153,6 @@
   --input: oklch(1 0 0 / 10%);
   --ring: oklch(0.65 0.16 55);
 
-  --chart-1: oklch(0.65 0.16 55);
-  --chart-2: oklch(0.55 0.14 170);
-  --chart-3: oklch(0.6 0.12 250);
-  --chart-4: oklch(0.7 0.1 40);
-  --chart-5: oklch(0.5 0.08 300);
-
   --sidebar: oklch(0.145 0.03 270);
   --sidebar-foreground: oklch(0.94 0.01 90);
   --sidebar-primary: oklch(0.65 0.16 55);
@@ -106,7 +162,6 @@
   --sidebar-border: oklch(1 0 0 / 8%);
   --sidebar-ring: oklch(0.65 0.16 55);
 
-  /* Custom tokens */
   --copper: oklch(0.65 0.16 55);
   --copper-light: oklch(0.72 0.14 55);
   --ink: oklch(0.12 0.025 270);
@@ -116,9 +171,8 @@
   --frost-2: oklch(0.7 0.03 270);
   --glow: oklch(0.72 0.12 170);
 
-  --font-display-name: "Space Grotesk", sans-serif;
-  --font-body-name: "Inter", sans-serif;
-  --font-mono-name: "JetBrains Mono", monospace;
+  /* Light stone for near-black brand icons on dark tiles */
+  --icon-neutral: #e7e5e4;
 }
 
 @layer base {
@@ -182,6 +236,14 @@
 
 @utility glow-soft {
   box-shadow: 0 0 80px -30px color-mix(in oklab, var(--color-copper) 30%, transparent);
+}
+
+/* Layered elevation for cards — reads as depth on the light canvas,
+   invisible against the dark theme (near-black on near-black). */
+@utility shadow-card {
+  box-shadow:
+    0 1px 2px rgb(15 23 42 / 0.05),
+    0 18px 44px -30px rgb(15 23 42 / 0.5);
 }
 
 /* Scroll-driven reveal animation */
@@ -573,4 +635,182 @@ button:focus-visible,
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* =========================================================
+   LIGHT THEME adjustments — ambient effects on pale paper
+   ========================================================= */
+
+/* Dark-theme ambient system (twinkling stars, tech grid, scan sweep,
+   shooting stars) — night-sky effects, removed from the light canvas.
+   Light keeps only: base color + cool/peach corner glows + soft vignette. */
+html:not(.dark) .starfield-small,
+html:not(.dark) .starfield-medium,
+html:not(.dark) .starfield-bright,
+html:not(.dark) .signal-grid,
+html:not(.dark) .signal-scan,
+html:not(.dark) .shooting-star {
+  display: none;
+}
+
+/* Crisp white form fields — clear separation from the canvas */
+html:not(.dark) #contact input,
+html:not(.dark) #contact textarea {
+  background-color: oklch(1 0 0);
+}
+
+/* Template-style corner glows — a soft cool haze top-left and a warm
+   peach wash bleeding in from the top-right (reference look). Light only. */
+.ambient-cool,
+.ambient-warm {
+  display: none;
+}
+
+html:not(.dark) .ambient-cool {
+  display: block;
+  position: absolute;
+  top: -160px;
+  left: -180px;
+  width: 720px;
+  height: 540px;
+  border-radius: 9999px;
+  background: radial-gradient(
+    closest-side,
+    rgb(148 163 184 / 0.2),
+    rgb(148 163 184 / 0.06) 55%,
+    transparent 78%
+  );
+  filter: blur(28px);
+}
+
+/* Warm wash bleeds in from the top-right — reference template glow */
+html:not(.dark) .ambient-warm {
+  display: block;
+  position: absolute;
+  top: -190px;
+  right: -150px;
+  width: 800px;
+  height: 580px;
+  border-radius: 9999px;
+  background: radial-gradient(
+    closest-side,
+    rgb(249 115 22 / 0.16),
+    rgb(249 115 22 / 0.05) 55%,
+    transparent 78%
+  );
+  filter: blur(24px);
+}
+
+/* Light theme typography — geometric bold sans (Poppins), template style.
+   Dark theme keeps its Space Grotesk / Inter / JetBrains Mono stack. */
+html:not(.dark) {
+  --font-display-name: "Poppins", sans-serif;
+  --font-body-name: "Poppins", sans-serif;
+  --font-mono-name: "Poppins", sans-serif;
+}
+
+html:not(.dark) .heading-xl,
+html:not(.dark) .heading-lg {
+  font-weight: 700;
+}
+
+/* Light navbar — template style: clean sentence-case links with a soft
+   peach active pill (dark keeps mono uppercase + animated underline) */
+html:not(.dark) .nav-group {
+  gap: 0.25rem;
+}
+
+html:not(.dark) .nav-group .nav-link {
+  font-family: var(--font-body-name);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: normal;
+  text-transform: none;
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease;
+}
+
+html:not(.dark) .nav-group .nav-link::after {
+  display: none;
+}
+
+html:not(.dark) .nav-group .nav-link:hover {
+  background-color: color-mix(in oklab, var(--color-copper) 8%, transparent);
+}
+
+html:not(.dark) .nav-group .nav-link.is-active {
+  background-color: color-mix(in oklab, var(--color-copper) 14%, transparent);
+}
+
+/* Let's Talk CTA — same typographic weight/size as the nav links */
+html:not(.dark) .nav-cta {
+  font-family: var(--font-body-name);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: normal;
+}
+
+/* ------------------------------------------------------------------ */
+/* Theme switch — 3D card flip: the old theme spins away on the Y axis */
+/* while the new one spins in (View Transition API; browsers without   */
+/* it just swap instantly)                                             */
+/* ------------------------------------------------------------------ */
+::view-transition-old(root),
+::view-transition-new(root) {
+  mix-blend-mode: normal;
+  animation-duration: var(--vt-dur, 0.5s);
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+  animation-name: flip-away;
+  animation-fill-mode: forwards;
+}
+
+::view-transition-new(root) {
+  z-index: 2;
+  animation-name: flip-in;
+  animation-fill-mode: forwards;
+}
+
+@keyframes flip-away {
+  from {
+    transform: perspective(1200px) rotateY(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: perspective(1200px) rotateY(72deg);
+    opacity: 0;
+  }
+}
+
+@keyframes flip-in {
+  from {
+    transform: perspective(1200px) rotateY(-72deg);
+    opacity: 0;
+  }
+  to {
+    transform: perspective(1200px) rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.01s;
+  }
+}
+
+/* Light canvas gets a gentler vignette */
+html:not(.dark) .starfield-vignette {
+  background: radial-gradient(
+    ellipse 92% 76% at 50% 35%,
+    transparent 45%,
+    color-mix(in oklab, var(--color-background) 55%, transparent) 100%
+  );
 }

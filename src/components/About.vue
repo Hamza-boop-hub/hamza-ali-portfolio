@@ -31,13 +31,13 @@ const highlights = [
     icon: Layout,
     title: "Frontend Integration",
     description:
-      "Crafting responsive, accessible interfaces with Vue.js, Tailwind CSS, and modern JavaScript patterns.",
+      "Responsive, accessible interfaces with Vue.js, Tailwind CSS and modern JavaScript patterns.",
   },
   {
     icon: FileCode,
     title: "Clean, Maintainable Code",
     description:
-      "Writing clean, structured, and reusable code that is easy to test, maintain, and scale.",
+      "Structured, reusable code that is easy to test, maintain and scale.",
   },
 ];
 </script>
@@ -93,7 +93,7 @@ const highlights = [
           <div class="grid gap-4 sm:grid-cols-2">
             <Reveal v-for="(item, index) in highlights" :key="item.title" :delay="index * 80">
               <div
-                class="group h-full rounded-2xl border border-border bg-card/40 p-6 transition-all hover:border-copper/40 hover:bg-card"
+                class="group h-full rounded-2xl border border-border bg-card p-6 shadow-card transition-all hover:border-copper/40 hover:bg-card"
               >
                 <div
                   class="grid size-11 place-items-center rounded-xl bg-secondary text-copper transition-colors group-hover:bg-copper/20"

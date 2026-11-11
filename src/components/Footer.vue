@@ -25,7 +25,7 @@ const replayIntro = () => {
 </script>
 
 <template>
-  <footer class="border-t border-border bg-ink/50 py-12">
+  <footer class="border-t border-border bg-card py-12 dark:bg-ink/50">
     <div class="mx-auto max-w-7xl px-5 sm:px-8">
       <div class="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
         <div>
@@ -35,7 +35,9 @@ const replayIntro = () => {
             title="Replay intro"
             @click.prevent="replayIntro"
           >
-            <span class="grid size-8 place-items-center rounded-lg bg-primary text-sm font-semibold text-primary-foreground">
+            <span
+              class="grid size-8 place-items-center rounded-lg bg-foreground text-sm font-semibold text-background dark:bg-primary dark:text-primary-foreground"
+            >
               H
             </span>
             Hamza
