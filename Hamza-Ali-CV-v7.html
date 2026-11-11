@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hamza Ali — Junior Web Developer CV (v7 · Emerald Modern)</title>
+<style>
+  :root { --em: #0f766e; --em-deep: #115e59; --em-mid: #0d9488; --em-tint: #f0fdfa; --em-soft: #d1fae5; --ink: #1f2937; --muted: #6b7280; --line: #d1fae5; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Segoe UI", system-ui, Arial, sans-serif; background: #e8eeec; color: var(--ink); font-size: 11pt; line-height: 1.5; }
+
+  .toolbar { position: fixed; top: 14px; right: 14px; z-index: 10; display: flex; gap: 10px; align-items: center; }
+  .toolbar .hint { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 7px 11px; font-size: 11.5px; color: var(--muted); box-shadow: 0 4px 14px rgba(0,0,0,0.08); }
+  .toolbar button { font: inherit; font-size: 12.5px; font-weight: 600; color: #fff; background: var(--em); border: 0; border-radius: 8px; padding: 9px 16px; cursor: pointer; box-shadow: 0 4px 14px rgba(15,118,110,0.35); }
+  .toolbar button:hover { filter: brightness(1.08); }
+
+  .sheet { width: 210mm; min-height: 297mm; margin: 26px auto; background: #fff; box-shadow: 0 12px 40px rgba(0,0,0,0.14); overflow: hidden; }
+
+  /* header */
+  .hdr { background: linear-gradient(120deg, var(--em-deep) 0%, var(--em) 70%, var(--em-mid) 100%); color: #fff; padding: 8mm 14mm; display: flex; gap: 16px; align-items: center; position: relative; overflow: hidden; }
+  .hdr::before { content: ""; position: absolute; right: -40px; top: -60px; width: 210px; height: 210px; border-radius: 50%; background: rgba(255,255,255,0.07); }
+  .hdr::after { content: ""; position: absolute; right: 90px; bottom: -70px; width: 140px; height: 140px; border-radius: 50%; background: rgba(255,255,255,0.05); }
+  .avatar { flex: 0 0 auto; width: 66px; height: 66px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.9); background: rgba(255,255,255,0.14); display: grid; place-items: center; font-size: 19pt; font-weight: 700; letter-spacing: 0.03em; position: relative; z-index: 1; }
+  .hdr .who { position: relative; z-index: 1; }
+  h1 { font-size: 22pt; font-weight: 700; letter-spacing: 0.02em; line-height: 1.05; }
+  .role { margin-top: 3px; font-size: 9pt; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: #d1fae5; }
+  .contact { margin-top: 8px; font-size: 8.5pt; color: #ecfdf5; }
+  .contact a { color: inherit; text-decoration: none; white-space: nowrap; }
+  .contact > span { white-space: nowrap; }
+  .contact .d { color: #a7f3d0; margin: 0 6px; }
+
+  .main { padding: 7mm 12mm 6mm; }
+
+  /* cards */
+  .card { margin-top: 24px; padding: 0; }
+  .card h2 { display: flex; align-items: center; gap: 12px; padding: 8px 0; font-size: 12.5pt; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--em-deep); margin-bottom: 9px; }
+  .card h2::before, .card h2::after { content: ""; flex: 1; height: 1px; background: #99f6e4; }
+  p.lead { font-size: 11pt; color: #374151; text-align: justify; }
+
+  /* skills — name + rating dots, two columns (ref layout, emerald theme) */
+  .sk-grid { display: flex; gap: 8px 34px; margin-top: 4px; }
+  .sk-col { flex: 1; border-left: 2px solid #99f6e4; padding-left: 10px; }
+  .sk-col + .sk-col { border-left: none; }
+  .sk-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 4px 0; }
+  .sk-name { font-size: 10.5pt; color: var(--ink); white-space: nowrap; }
+  .lang-col { flex: 0 0 calc((100% - 34px) / 2); }
+  .sk-dots { display: inline-flex; gap: 5px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: #d6ebe7; }
+  .dot.on { background: var(--em-mid); }
+
+  /* entries */
+  .entry { margin-top: 7px; }
+  .entry:first-of-type { margin-top: 0; }
+  .e-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+  .e-head .t { font-size: 11pt; font-weight: 700; }
+  .e-head .t em { font-style: normal; font-weight: 600; color: var(--em); }
+  .e-head .t em::before { content: "→ "; color: var(--em-mid); font-weight: 700; }
+  .pill { flex: 0 0 auto; font-size: 8pt; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: #fff; background: var(--em); border-radius: 999px; padding: 2px 9px; white-space: nowrap; }
+  ul { margin: 2px 0 0 15px; }
+  li { margin-top: 3.5px; font-size: 10.5pt; color: #3f4a48; }
+  li::marker { color: var(--em-mid); }
+  a.plain { color: var(--em-deep); text-decoration: none; border-bottom: 1px dotted #99f6e4; }
+
+  .edu { font-size: 10.5pt; color: var(--muted); padding: 2px 0; }
+  .edu b { color: var(--em-deep); }
+  footer { margin-top: 16px; text-align: center; font-size: 9.5pt; color: var(--muted); }
+  footer b { color: var(--em-deep); }
+
+  /* ---------- print ---------- */
+  @page { size: A4; margin: 0; }
+  @media print {
+    body { background: #fff; }
+    .toolbar { display: none !important; }
+    .sheet { width: auto; min-height: 297mm; margin: 0; box-shadow: none; overflow: visible; }
+    .entry, .e-head, .card { break-inside: avoid; }
+    h2 { break-after: avoid; }
+    .card-projects { padding-top: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <span class="hint">Ctrl+P → Paper: <b>A4</b> → Margins: <b>None</b> → ☑ <b>Background graphics</b> → Save as PDF</span>
+  <button onclick="window.print()">🖨 Save as PDF</button>
+</div>
+
+<div class="sheet">
+
+  <header class="hdr">
+    <div class="avatar">HA</div>
+    <div class="who">
+      <h1>Hamza Ali</h1>
+      <div class="role">Junior Web Developer</div>
+      <div class="contact">
+        <a href="mailto:hamzamumtaz0600@gmail.com">hamzamumtaz0600@gmail.com</a><span class="d">•</span>
+        <a href="tel:+923096717017">+92 309 6717017</a><span class="d">•</span>
+        <a href="https://www.linkedin.com/in/hazma-ali-965101429">linkedin.com/in/hazma-ali-965101429</a><span class="d">•</span>
+        <a href="https://github.com/Hamza-boop-hub">github.com/Hamza-boop-hub</a><span class="d">•</span>
+        <a href="https://hamza-ali-dev.netlify.app/">hamza-ali-dev.netlify.app</a><span class="d">•</span>
+        <span>Sargodha, Pakistan</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="main">
+
+    <div class="card">
+      <h2>Profile</h2>
+      <p class="lead">
+        PHP &amp; Laravel developer who turns ideas into real, working websites — from clean
+        backend architecture to a smooth, modern frontend. I build complete, database-driven
+        products: <b>REST APIs, dashboards and production-ready interfaces</b>. I care about code
+        that's easy to maintain, not just code that works today, and I keep improving how I build
+        things.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Skills</h2>
+      <div class="sk-grid">
+        <div class="sk-col">
+          <div class="sk-row"><span class="sk-name">Laravel</span><span class="sk-dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i></span></div>
+          <div class="sk-row"><span class="sk-name">PHP</span><span class="sk-dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i></span></div>
+          <div class="sk-row"><span class="sk-name">MySQL</span><span class="sk-dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i></span></div>
+          <div class="sk-row"><span class="sk-name">REST APIs</span><span class="sk-dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i></span></div>
+          <div class="sk-row"><span class="sk-name">Command Line</span><span class="sk-dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i></span></div>
+          <div class="sk-row"><span class="sk-name">JavaScript</span><span class="sk-dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i></span></div>
+          <div class="sk-row"><span class="sk-name">Vue.js</span><span class="sk-dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i></span></div>
+        </div>
+        <div class="sk-col">
+          <div class="sk-row"><span class="sk-name">HTML5</span><span class="sk-dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i></span></div>
+          <div class="sk-row"><span class="sk-name">CSS</span><span class="sk-dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i></span></div>
+          <div class="sk-row"><span class="sk-name">Tailwind CSS</span><span class="sk-dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i></span></div>
+          <div class="sk-row"><span class="sk-name">Bootstrap</span><span class="sk-dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i></span></div>
+          <div class="sk-row"><span class="sk-name">Git &amp; GitHub</span><span class="sk-dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i></span></div>
+          <div class="sk-row"><span class="sk-name">Cursor</span><span class="sk-dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i></span></div>
+          <div class="sk-row"><span class="sk-name">Claude</span><span class="sk-dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Experience</h2>
+
+      <div class="entry">
+        <div class="e-head">
+          <span class="t">Junior Web Developer <em>Sublime Logics</em></span>
+          <span class="pill">6 Months</span>
+        </div>
+        <ul>
+          <li>Worked on real-world web development tasks, contributing to live projects and shipping features as part of the development team.</li>
+          <li>Integrated third-party services into production websites — live chatbot, Google reCAPTCHA, CRM-driven contact/job/student forms, Microsoft Clarity and Google Tag Manager.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="e-head">
+          <span class="t">Web Development Intern <em>Sublime Logics</em></span>
+          <span class="pill">3 Months</span>
+        </div>
+        <ul>
+          <li>Completed a three-month internship with hands-on experience in web development and professional coding practices.</li>
+          <li>Contributed to development tasks on real projects.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="e-head">
+          <span class="t">Self-Taught Web Developer <em>Independent Learning</em></span>
+          <span class="pill">Self-Learning</span>
+        </div>
+        <ul>
+          <li>Learned HTML, CSS, JavaScript and Laravel through self-study and hands-on practice, building a strong foundation in web development.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card card-projects">
+      <h2>Selected Projects</h2>
+
+      <div class="entry">
+        <div class="e-head">
+          <span class="t">Employee Performance Review System</span>
+          <span class="pill">Laravel · Filament v3</span>
+        </div>
+        <ul>
+          <li>Built a full performance-review module inside a Laravel accounting app — automated monthly reviews, employee self-review portal, weighted KPI scoring, reports, and Discord + email notifications with role-based access control.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="e-head">
+          <span class="t">Sublime Logics — Company Website <em>contributions</em></span>
+          <span class="pill">Vue.js · Nuxt</span>
+        </div>
+        <ul>
+          <li>Contributed chatbot and reCAPTCHA integrations, CRM-connected registration forms and analytics setup to the production company website — <a class="plain" href="https://www.sublimelogics.com/">www.sublimelogics.com</a></li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="e-head">
+          <span class="t">Sweet Creamery — Landing Page</span>
+          <span class="pill">HTML · CSS · JS</span>
+        </div>
+        <ul>
+          <li>Responsive ice-cream shop landing page, deployed on Netlify — <a class="plain" href="https://hamza-sweetcreamery.netlify.app">hamza-sweetcreamery.netlify.app</a></li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="e-head">
+          <span class="t">Personal Portfolio Website</span>
+          <span class="pill">Vue 3 · Vite</span>
+        </div>
+        <ul>
+          <li>Animated, responsive portfolio with routed project detail pages — <a class="plain" href="https://hamza-ali-dev.netlify.app/">hamza-ali-dev.netlify.app</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Education</h2>
+      <div class="edu">
+        <b>FA (Information Technology)</b> — Ambala Muslim College, Sargodha · 2025
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Languages</h2>
+      <div class="sk-grid">
+        <div class="sk-col lang-col">
+          <div class="sk-row"><span class="sk-name">English</span><span class="sk-dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i></span></div>
+          <div class="sk-row"><span class="sk-name">Urdu</span><span class="sk-dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i></span></div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <b>Hamza Ali</b> · Junior Web Developer · Laravel · Vue · PHP — references available on request
+    </footer>
+
+  </div>
+</div>
+</body>
+</html>
