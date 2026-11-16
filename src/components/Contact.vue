@@ -25,8 +25,8 @@ const contactLinks = [
   {
     icon: Linkedin,
     label: "LinkedIn",
-    value: "linkedin.com/in/hazma-ali-965101429",
-    href: "https://www.linkedin.com/in/hazma-ali-965101429/",
+    value: "linkedin.com/in/hamza-ali-web",
+    href: "https://www.linkedin.com/in/hamza-ali-web/",
   },
   {
     icon: Mail,

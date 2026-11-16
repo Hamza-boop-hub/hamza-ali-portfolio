@@ -13,7 +13,7 @@ const footerLinks = [
 
 const socialLinks = [
   { icon: Github, href: "https://github.com/Hamza-boop-hub", label: "GitHub" },
-  { icon: Linkedin, href: "https://www.linkedin.com/in/hazma-ali-965101429/", label: "LinkedIn" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/hamza-ali-web/", label: "LinkedIn" },
   { icon: Mail, href: "https://mail.google.com/mail/?view=cm&fs=1&to=hamzamumtaz0600@gmail.com", label: "Email" },
 ];
 
